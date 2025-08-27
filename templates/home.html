@@ -1,11 +1,143 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Boston House Price Prediction</title>
+    <!-- Include Tailwind CSS via CDN for quick styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include Google Fonts for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom animations for a smoother user experience */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
 </head>
-<body>
-    <h1>Hello</h1>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-6">
+
+    <!-- Main container card with a modern look -->
+    <div class="bg-gray-800 p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-2xl">
+
+        <!-- Header Section -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-indigo-400 mb-2">
+                Boston House Price Predictor
+            </h1>
+            <p class="text-gray-400 text-base md:text-lg">
+                Enter the property details below to get an estimated house price.
+            </p>
+        </div>
+
+        <!-- Prediction Form -->
+        <form action="/predict" method="post" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+            <!-- Input fields with improved styling -->
+            <div class="flex flex-col">
+                <label for="CRIM" class="text-sm font-semibold text-gray-300 mb-1">CRIM (Per capita crime rate)</label>
+                <input type="number" step="any" name="CRIM" id="CRIM" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="ZN" class="text-sm font-semibold text-gray-300 mb-1">ZN (Residential land zoned)</label>
+                <input type="number" step="any" name="ZN" id="ZN" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="INDUS" class="text-sm font-semibold text-gray-300 mb-1">INDUS (Non-retail business acres)</label>
+                <input type="number" step="any" name="INDUS" id="INDUS" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="CHAS" class="text-sm font-semibold text-gray-300 mb-1">CHAS (Charles River dummy variable)</label>
+                <input type="number" step="any" name="CHAS" id="CHAS" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="NOX" class="text-sm font-semibold text-gray-300 mb-1">NOX (Nitric oxides concentration)</label>
+                <input type="number" step="any" name="NOX" id="NOX" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="RM" class="text-sm font-semibold text-gray-300 mb-1">RM (Average number of rooms)</label>
+                <input type="number" step="any" name="RM" id="RM" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="AGE" class="text-sm font-semibold text-gray-300 mb-1">AGE (Proportion of owner-occupied units)</label>
+                <input type="number" step="any" name="AGE" id="AGE" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="DIS" class="text-sm font-semibold text-gray-300 mb-1">DIS (Weighted distances to employment centers)</label>
+                <input type="number" step="any" name="DIS" id="DIS" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="RAD" class="text-sm font-semibold text-gray-300 mb-1">RAD (Index of accessibility to radial highways)</label>
+                <input type="number" step="any" name="RAD" id="RAD" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="TAX" class="text-sm font-semibold text-gray-300 mb-1">TAX (Full-value property tax rate)</label>
+                <input type="number" step="any" name="TAX" id="TAX" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="PTRATIO" class="text-sm font-semibold text-gray-300 mb-1">PTRATIO (Pupil-teacher ratio)</label>
+                <input type="number" step="any" name="PTRATIO" id="PTRATIO" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="B" class="text-sm font-semibold text-gray-300 mb-1">B (1000(Bk - 0.63)^2)</label>
+                <input type="number" step="any" name="B" id="B" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+            
+            <div class="flex flex-col">
+                <label for="LSTAT" class="text-sm font-semibold text-gray-300 mb-1">LSTAT (% lower status of the population)</label>
+                <input type="number" step="any" name="LSTAT" id="LSTAT" required
+                       class="bg-gray-700 text-white rounded-md p-3 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200">
+            </div>
+        
+            <!-- Submit Button -->
+            <div class="sm:col-span-2 mt-4">
+                <button type="submit"
+                        class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-md shadow-lg hover:bg-indigo-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                    Predict Price
+                </button>
+            </div>
+        </form>
+
+        <!-- Prediction Result Display -->
+        {% if prediction_text %}
+        <div class="mt-8 text-center bg-gray-700 p-6 rounded-xl border border-indigo-500 animate-fadeIn">
+            <h3 class="text-lg font-bold text-indigo-400 mb-2">Prediction:</h3>
+            <p class="text-3xl md:text-4xl font-extrabold text-green-400">
+                {{ prediction_text }}
+            </p>
+        </div>
+        {% endif %}
+
+    </div>
+
 </body>
 </html>
