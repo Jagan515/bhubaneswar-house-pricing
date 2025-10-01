@@ -95,10 +95,10 @@ The project is deployed on **Render**.
 ---
 
 ## 🤝 Contributing
+We welcome contributions to make this project better! 🎉  
 
-This is my first Data Science project, and I’m open to feedback, suggestions, and improvements.
+Please check the [CONTRIBUTING.md](CONTRIBUTING.md) guide for setup, workflow, and guidelines.  
 
-Feel free to fork the repo and raise a pull request! 🚀
 
 ---
 
