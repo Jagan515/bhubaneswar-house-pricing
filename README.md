@@ -1,8 +1,28 @@
-# 🏠 [Boston House Pricing Prediction ](https://bostonhousepricing-pxxt.onrender.com/)
+# 🏠 Boston House Pricing Prediction
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white&style=for-the-badge">
+  <img src="https://img.shields.io/badge/Pickle-Data%20Serialization-green?logo=database&logoColor=white&style=for-the-badge">
+  <img src="https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask&style=for-the-badge">
+</p>
 
-This is my first Data Science project using the **Boston Housing dataset**.  
-The goal of the project is to build a machine learning model that predicts house prices based on various features.  
+<p align="center">
+   <strong>
+      Live demonstration!
+   </strong>
+</p>
+
+<p align="center">
+  <a target="_blank" rel="noopener noreferrer" href="https://bostonhousepricing-pxxt.onrender.com/">
+    <img src="https://img.shields.io/badge/View%20on-Render-purple?logo=render&style=for-the-badge">
+  </a>
+</p>
+
+<hr>
+
+This Data Science project uses the Boston Housing Dataset. The goal of the project is to build an ML model that predicts house prices based on various features
+
+This is my first Data Science project using the **Boston Housing dataset**. The goal of the project is to build a machine learning model that predicts house prices based on various features.
 
 I performed **Exploratory Data Analysis (EDA)**, studied **correlations**, applied **feature scaling**, and built a **Linear Regression model** using pipelines. The model was serialized with **Pickle**, and deployed using **Render**.
 
