@@ -19,12 +19,12 @@
 
 <hr>
 
-## 📘 Overview
+##  Overview
 
 **Bhubaneswar House Price Prediction** is a Flask-based Machine Learning web application that predicts housing prices using a pre-trained model.  
 It leverages **Scikit-learn**, **Flask**, and **Docker** to make deployment simple, fast, and portable.
 
-## 🚀 Project Workflow
+##  Project Workflow
 
 1. **Exploratory Data Analysis (EDA)**
    - Visualized feature distributions to detect skewedness and outliers
@@ -55,7 +55,7 @@ It leverages **Scikit-learn**, **Flask**, and **Docker** to make deployment simp
    - Included Bhubaneswar-specific locality information
    - Deployed the model as a Flask app on Render
 
-## 🏙️ Bhubaneswar Housing Features
+## Bhubaneswar Housing Features
 
 The model considers these key factors specific to Bhubaneswar:
 
@@ -69,7 +69,7 @@ The model considers these key factors specific to Bhubaneswar:
 | **Pollution Level** | Air quality index in the area |
 | **Employment Distance** | Distance to major IT hubs and offices |
 
-## ⚙️ Technologies Used
+##  Technologies Used
 
 - 🐍 **Python 3.13**
 - 🧠 **Scikit-learn**
@@ -80,7 +80,7 @@ The model considers these key factors specific to Bhubaneswar:
 
 ## 🐳 Docker Setup
 
-### 🧩 Dockerfile
+###  Dockerfile
 
 Here's the Dockerfile used:
 
@@ -107,37 +107,79 @@ EXPOSE $PORT
 CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:$PORT", "--workers", "3"]
 ```
 
-## 🧱 Build and Run Docker Image Locally
+##  Build and Run Docker Image Locally
 
 ### **Step 1:** Build the image
 
 ```bash
-docker build -t bhubaneswar-house-pricing .
+docker build -t jagan515/pencil .
 ```
 
 ### **Step 2:** Run the container
 
 ```bash
-docker run -p 8888:5000 bhubaneswar-house-pricing
+docker run -p 8888:5000 jagan515/pencil
 ```
 
 ### **Step 3:** Open the app
 
 Visit [http://localhost:8888](http://localhost:8888) in your browser.
 
-## 📦 Common Docker Commands
+## 🔍 Detailed Docker Command Explanation
 
-| Command                     | Meaning                     |
-| --------------------------- | --------------------------- |
-| `docker ps`                 | Shows running containers    |
-| `docker images`             | Lists all Docker images     |
-| `docker stop <id>`          | Stops a running container   |
-| `docker rm <id>`            | Removes a stopped container |
-| `docker rmi <image>`        | Deletes a Docker image      |
-| `docker logs <id>`          | View container logs         |
-| `docker exec -it <id> bash` | Access container terminal   |
+### **`docker build -t jagan515/pencil .` - Breaking it down:**
 
-## 🚀 Deploying to Render
+- **`docker`** - The Docker command-line interface program
+- **`build`** - The subcommand to build a new image from a Dockerfile
+- **`-t jagan515/pencil`** - The `-t` flag tags your image with a name
+  - **`jagan515`** - Your Docker Hub username (for pushing to registry)
+  - **`pencil`** - The name of your application
+  - **`/`** - Separates username from repository name
+  - This creates a local image named `jagan515/pencil:latest` (latest is default tag)
+- **`.`** - The build context (current directory)
+  - Docker looks for a `Dockerfile` in this directory
+  - All files in this directory are sent to Docker daemon (use `.dockerignore` to exclude files)
+
+### **`docker run -p 8888:5000 jagan515/pencil` - Breaking it down:**
+
+- **`docker`** - Docker CLI program
+- **`run`** - Creates and starts a new container from an image
+- **`-p 8888:5000`** - Port mapping flag (`-p` = publish)
+  - **`8888`** - Host machine port (your computer)
+  - **`5000`** - Container internal port (where your Flask app runs)
+  - Format: `host_port:container_port`
+  - This maps port 5000 inside container to port 8888 on your machine
+- **`jagan515/pencil`** - The image name to run
+  - Docker looks for this image locally first, then on Docker Hub if not found
+
+### **What happens when you run these commands:**
+
+1. **Build Process:**
+   - Docker reads `Dockerfile` in current directory
+   - Creates layers for each instruction in Dockerfile
+   - Installs Python, dependencies, copies your code
+   - Creates a final image tagged as `jagan515/pencil`
+
+2. **Run Process:**
+   - Docker creates a container from your image
+   - Sets up isolated environment with your app
+   - Maps network ports so you can access the app
+   - Starts the Flask app with Gunicorn server
+   - Your app is now running in an isolated container
+
+##  Common Docker Commands Explained
+
+| Command | Breakdown | Purpose |
+|---------|-----------|---------|
+| **`docker ps`** | `docker` + `process status` | Shows all running containers |
+| **`docker images`** | `docker` + `images` | Lists all Docker images on your system |
+| **`docker stop <id>`** | `docker` + `stop` + `container_id` | Gracefully stops a running container |
+| **`docker rm <id>`** | `docker` + `remove` + `container_id` | Deletes a stopped container |
+| **`docker rmi <image>`** | `docker` + `remove image` + `image_name` | Deletes a Docker image from system |
+| **`docker logs <id>`** | `docker` + `logs` + `container_id` | Shows console output from container |
+| **`docker exec -it <id> bash`** | `execute` + `interactive terminal` | Opens bash shell inside running container |
+
+##  Deploying to Render
 
 1. Push your project (with `Dockerfile`) to GitHub
 2. Connect your GitHub repo to [Render.com](https://render.com)
@@ -150,9 +192,9 @@ Visit [http://localhost:8888](http://localhost:8888) in your browser.
 3. Set start command: `gunicorn app:app`
 4. Deploy!
 
-👉 [Live Demo](#) *[Add your Render deployment link here]*
+ [Live Demo](https://bostonhousepricing-pxxt.onrender.com) 
 
-## 📊 Model Performance
+##  Model Performance
 
 - **Mean Absolute Error (MAE):** ₹3.19 lakhs
 - **Root Mean Squared Error (RMSE):** ₹4.93 lakhs  
@@ -161,14 +203,14 @@ Visit [http://localhost:8888](http://localhost:8888) in your browser.
 
 The linear regression model explains approximately **67% of the variance** in Bhubaneswar housing prices. On average, predictions deviate from actual values by about **₹3-5 lakhs**.
 
-## 🎯 Key Features
+##  Key Features
 
 ### 🔍 **Smart Input Validation**
 - Range sliders with predefined limits based on actual data
 - Categorical options with detailed descriptions
 - Prevents unrealistic inputs that could cause negative predictions
 
-### 🏘️ **Bhubaneswar Context**
+###  **Bhubaneswar Context**
 - Famous localities integration (Nayapalli, Saheed Nagar, Patia, etc.)
 - Local factors like Kuakhai River proximity
 - Indian real estate market considerations
@@ -226,7 +268,7 @@ bhubaneswar-house-pricing/
 └── README.md             # Project documentation
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions to improve this project! 🎉
 
@@ -238,32 +280,32 @@ We welcome contributions to improve this project! 🎉
 
 Please check the [CONTRIBUTING.md](CONTRIBUTING.md) guide for detailed setup, workflow, and guidelines.
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Dataset inspired by Boston Housing Dataset, adapted for Bhubaneswar context
 - Scikit-learn documentation for machine learning implementation
 - Flask community for web framework guidance
 - Render for deployment platform
 
-## ✍️ Author
+##  Author
 
 **Jagan Pradhan**
-- 📧 [jaganp515@gmail.com](mailto:jaganp515@gmail.com)
-- 🔗 [LinkedIn](https://linkedin.com/in/jaganpradhan)
-- 💻 [GitHub](https://github.com/Jagan515)
+-  [jaganp515@gmail.com](mailto:jaganp515@gmail.com)
+-  [LinkedIn](https://linkedin.com/in/jaganpradhan)
+-  [GitHub](https://github.com/Jagan515)
 
 ---
 
 <div align="center">
 
-**⭐ Don't forget to star this repository if you find it helpful!**
+** Don't forget to star this repository if you find it helpful!**
 
-*Built with ❤️ for the Bhubaneswar real estate community*
+*Built with  for the Bhubaneswar real estate community*
 
-> 💡 "Containerizing apps makes them portable, reproducible, and deployment-ready anywhere."
+>  "Containerizing apps makes them portable, reproducible, and deployment-ready anywhere."
 
 </div>
