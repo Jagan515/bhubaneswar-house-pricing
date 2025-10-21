@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/badge/Pickle-Data%20Serialization-green?logo=database&logoColor=white&style=for-the-badge">
   <img src="https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask&style=for-the-badge">
   <img src="https://img.shields.io/badge/Scikit--Learn-ML%20Library-orange?logo=scikitlearn&logoColor=white&style=for-the-badge">
+  <img src="https://img.shields.io/badge/Docker-Containerized-blue?logo=docker&logoColor=white&style=for-the-badge">
 </p>
 
 <h3 align="center">An ML project that predicts house prices in Bhubaneswar, Odisha!</h3>
@@ -17,6 +18,11 @@
 </p>
 
 <hr>
+
+## 📘 Overview
+
+**Bhubaneswar House Price Prediction** is a Flask-based Machine Learning web application that predicts housing prices using a pre-trained model.  
+It leverages **Scikit-learn**, **Flask**, and **Docker** to make deployment simple, fast, and portable.
 
 ## 🚀 Project Workflow
 
@@ -63,16 +69,88 @@ The model considers these key factors specific to Bhubaneswar:
 | **Pollution Level** | Air quality index in the area |
 | **Employment Distance** | Distance to major IT hubs and offices |
 
-## 🛠️ Tech Stack
+## ⚙️ Technologies Used
 
-| Layer | Technology |
-|---|---|
-| **Data Analysis** | Python, NumPy, Pandas, Matplotlib, Seaborn |
-| **Machine Learning** | Scikit-learn, Linear Regression, K-Fold CV |
-| **Preprocessing** | StandardScaler, IQR Outlier Detection, Stratified Split |
-| **Backend** | Flask, Pickle, Joblib |
-| **Frontend** | HTML5, CSS3, Bootstrap, JavaScript |
-| **Deployment** | Render, Gunicorn |
+- 🐍 **Python 3.13**
+- 🧠 **Scikit-learn**
+- 🔥 **Flask**
+- 🐳 **Docker**
+- ☁️ **Render** (for deployment)
+- 📊 **Pickle** (for model serialization)
+
+## 🐳 Docker Setup
+
+### 🧩 Dockerfile
+
+Here's the Dockerfile used:
+
+```dockerfile
+FROM python:3.13-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements
+COPY requirements.txt /app/
+
+# Install dependencies
+RUN python -m pip install --upgrade pip \
+ && pip install --no-cache-dir -r requirements.txt
+
+# Copy all files (including .pkl models)
+COPY . /app
+
+# Expose Render-assigned port
+EXPOSE $PORT
+
+# Start app with Gunicorn
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:$PORT", "--workers", "3"]
+```
+
+## 🧱 Build and Run Docker Image Locally
+
+### **Step 1:** Build the image
+
+```bash
+docker build -t bhubaneswar-house-pricing .
+```
+
+### **Step 2:** Run the container
+
+```bash
+docker run -p 8888:5000 bhubaneswar-house-pricing
+```
+
+### **Step 3:** Open the app
+
+Visit [http://localhost:8888](http://localhost:8888) in your browser.
+
+## 📦 Common Docker Commands
+
+| Command                     | Meaning                     |
+| --------------------------- | --------------------------- |
+| `docker ps`                 | Shows running containers    |
+| `docker images`             | Lists all Docker images     |
+| `docker stop <id>`          | Stops a running container   |
+| `docker rm <id>`            | Removes a stopped container |
+| `docker rmi <image>`        | Deletes a Docker image      |
+| `docker logs <id>`          | View container logs         |
+| `docker exec -it <id> bash` | Access container terminal   |
+
+## 🚀 Deploying to Render
+
+1. Push your project (with `Dockerfile`) to GitHub
+2. Connect your GitHub repo to [Render.com](https://render.com)
+3. Choose **"Docker"** as the deployment environment
+4. Render automatically builds and runs your Docker image
+
+### Deployment Steps:
+1. Connect your GitHub repository to Render
+2. Set build command: `pip install -r requirements.txt`
+3. Set start command: `gunicorn app:app`
+4. Deploy!
+
+👉 [Live Demo](#) *[Add your Render deployment link here]*
 
 ## 📊 Model Performance
 
@@ -134,18 +212,6 @@ python app.py
 5. **Access the application:**
 Open your browser and navigate to `http://localhost:5000`
 
-## 🌐 Deployment
-
-The project is deployed on **Render** for public access.
-
-### Deployment Steps:
-1. Connect your GitHub repository to Render
-2. Set build command: `pip install -r requirements.txt`
-3. Set start command: `gunicorn app:app`
-4. Deploy!
-
-👉 [Live Demo](#) *[Add your Render deployment link here]*
-
 ## 📁 Project Structure
 
 ```
@@ -197,5 +263,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 **⭐ Don't forget to star this repository if you find it helpful!**
 
 *Built with ❤️ for the Bhubaneswar real estate community*
+
+> 💡 "Containerizing apps makes them portable, reproducible, and deployment-ready anywhere."
 
 </div>
