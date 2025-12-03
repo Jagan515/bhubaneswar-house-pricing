@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Repository checkout complete
-        run: echo "Step 1 complete: Repository code downloaded to runner."
+        run: echo "Step 1 complete Repository code downloaded to runner."
 
       # 2. Setup Python for running tests
       - name: Set up Python 3.11
@@ -29,7 +29,7 @@ jobs:
           pip install pytest
 
       - name: Python setup complete
-        run: echo "Step 2 complete: Python and test dependencies installed."
+        run: echo "Step 2 complete Python and test dependencies installed."
 
       # 3. Run tests
       - name: Run pytest tests
@@ -39,14 +39,14 @@ jobs:
 
       - name: Tests passed
         if: success()
-        run: echo "Step 3 complete: All pytest tests passed."
+        run: echo "Step 3 complete All pytest tests passed."
 
       # 4. Setup Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
       - name: Buildx ready
-        run: echo "Step 4 complete: Docker Buildx configured."
+        run: echo "Step 4 complete Docker Buildx configured."
 
       # 5. Build Docker image
       - name: Build Docker image
@@ -57,7 +57,7 @@ jobs:
           docker image ls "${IMAGE_NAME}:${TAG}" || true
 
       - name: Docker build complete
-        run: echo "Step 5 complete: Docker image built successfully."
+        run: echo "Step 5 complete Docker image built successfully."
 
       # 6. Login to Docker Hub
       - name: Log in to Docker Hub
@@ -69,7 +69,7 @@ jobs:
 
       - name: Docker Hub login complete
         if: secrets.DOCKERHUB_USERNAME && secrets.DOCKERHUB_TOKEN
-        run: echo "Step 6 complete: Logged into Docker Hub."
+        run: echo "Step 6 complete Logged into Docker Hub."
 
       # 7. Push image to Docker Hub
       - name: Tag and push image to Docker Hub
